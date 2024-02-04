@@ -1,6 +1,7 @@
 package pl.edu.agh.hangman;
 
-import java.io.IOException;
+import java.util.Scanner;
+
 
 public class Hangman {
 
@@ -64,8 +65,19 @@ public class Hangman {
 
 
         RandomWord random = new RandomWord();
-        System.out.println(random.getRandomWord());
+
+        Logic logic = new Logic(random.getRandomWord());
+        String input;
+
+        do{
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Podaj literke : ");
+            input = scanner.nextLine();
 
 
+        }while(logic.checkLetter(input.charAt(0)));
+
+
+   
     }
 }

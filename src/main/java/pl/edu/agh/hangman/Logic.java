@@ -9,7 +9,14 @@ public class Logic {
 
     public Logic(String wordToFind) {
         this.wordToFind = wordToFind.toUpperCase();
-        currentWord = new StringBuilder().insert(wordToFind.length(), "_");
+        //StringBuilder currentWord = new StringBuilder("_".repeat(wordToFind.length()));
+        StringBuilder currentWord = new StringBuilder();
+        for (int i = 0; i < wordToFind.length(); i++) {
+            currentWord.append("_");
+        }
+        this.currentWord=currentWord;
+
+
     }
 
     public boolean checkLetter(char letter) {
@@ -21,7 +28,7 @@ public class Logic {
 
             for (int i = 0; i < wordToFind.length(); i++) {
                 if (wordToFind.charAt(i) == letterUpper) {
-                    currentWord.replace(i, i, String.valueOf(letterUpper));
+                    currentWord.replace(i, i+1, String.valueOf(letterUpper));
                 }
             }
         }

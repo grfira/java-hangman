@@ -63,7 +63,11 @@ public class Hangman {
 
     public static void main(String[] args) {
 
-        RandomWord random = new RandomWord();
+
+
+        RandomWord random = new RandomWordFromFile();
+
+
 
         Logic logic = new Logic(random.getRandomWord());
         String input;
@@ -72,6 +76,7 @@ public class Hangman {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Podaj literke : ");
             input = scanner.nextLine();
+
 
         }while(logic.checkLetter(input.charAt(0)));
 

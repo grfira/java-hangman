@@ -4,29 +4,25 @@ import static pl.edu.agh.hangman.Hangman.*;
 
 public class PrintResult {
 
-    public static void printResult(int level, String word) {
+    public static boolean printResult(int level, String playerWord, String correctWord) {
 
-        StringBuilder stringBuilder = new StringBuilder(HANGMANPICS[level]);
-        stringBuilder.insert(31, "\t" + word);
+      //  System.out.println(level + playerWord + correctWord);
+       if(level < 7) {
+           StringBuilder stringBuilder = new StringBuilder(HANGMANPICS[level]);
+           stringBuilder.insert(31, "\t" + playerWord);
+           System.out.println(stringBuilder);
+       }
+       else {
+           System.out.println(GAMELOSE);
+           return false;}
 
-        /*if(level != 6 && word != "prawnik") {
-            System.out.println(HANGMANPICS[level]);
-            System.out.println("guess>");
-        }
 
-        if (level == 6) {
-            System.out.println(HANGMANPICS[level]);
-            System.out.println(GAMELOSE);
+       if(playerWord.contains(correctWord)){
+           System.out.println(GAMEWIN);
+           return false;
+       }
 
-        }
 
-        if (level !=6 && word == "prawnik") {
-            System.out.println(HANGMANPICS[level]);
-            System.out.println(GAMEWIN);
-
-        }*/
-
-        System.out.println(stringBuilder);
-
+        return true;
     }
 }

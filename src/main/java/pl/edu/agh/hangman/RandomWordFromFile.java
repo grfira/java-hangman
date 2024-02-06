@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class RandomWordFromFile implements RandomWord {
+public class RandomWordFromFile extends RandomWord {
 
     private ArrayList<String> getWordsFromFile(){
 

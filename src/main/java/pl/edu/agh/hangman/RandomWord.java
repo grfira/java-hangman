@@ -1,8 +1,9 @@
 package pl.edu.agh.hangman;
 
-public interface RandomWord {
+import java.util.ArrayList;
 
-    String getRandomWord();
+public abstract class RandomWord{
 
+    protected abstract String getRandomWord();
 
 }

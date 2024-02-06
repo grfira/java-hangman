@@ -16,12 +16,10 @@ public class PrintResult {
            System.out.println(GAMELOSE);
            return false;}
 
-
        if(playerWord.contains(correctWord)){
            System.out.println(GAMEWIN);
            return false;
        }
-
 
         return true;
     }

@@ -25,7 +25,6 @@ public class CheckResult {
         if (this.wordToFind.indexOf(letterUpper) < 0) {
             level++;
         } else {
-
             for (int i = 0; i < this.wordToFind.length(); i++) {
                 if (this.wordToFind.charAt(i) == letterUpper) {
                     this.currentWord.replace(i, i+1, String.valueOf(letterUpper));

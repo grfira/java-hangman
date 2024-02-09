@@ -7,13 +7,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
-public class RandomWordFromInternet extends RandomWord {
-
-    private ArrayList<String> getWordsFromInternet(){
+public class RandomWordFromInternet extends RandomWordProvider {
+    @Override
+    protected List<String> getWords() {
         Document doc = null;
-        ArrayList<String> result = null;
+        List<String> result = null;
         String[] words = null;
         try {
             doc = Jsoup.connect("http://www.wp.pl").get();
@@ -27,16 +26,7 @@ public class RandomWordFromInternet extends RandomWord {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        result  = new ArrayList<>(Arrays.asList(words));
-
-        return result;
-
+        return new ArrayList<>(Arrays.asList(words));
     }
 
-    @Override
-    public String getRandomWord() {
-        Random random = new Random();
-        ArrayList<String> randomWord = getWordsFromInternet();
-        return randomWord.get(random.nextInt(randomWord.size()));
-    }
 }

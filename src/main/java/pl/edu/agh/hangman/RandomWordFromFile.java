@@ -5,19 +5,19 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.List;
 
-public class RandomWordFromFile extends RandomWord {
-
-    private ArrayList<String> getWordsFromFile(){
+public class RandomWordFromFile extends RandomWordProvider {
+    @Override
+    protected List<String> getWords() {
 
         File file = new File("src/main/resources/slowa.txt");
-        ArrayList<String> allWords = new ArrayList<>();
+        List<String> allWords = new ArrayList<>();
         String line = null;
 
         try {
             BufferedReader bufferedReader = Files.newBufferedReader(file.toPath());
-            while((line = bufferedReader.readLine()) != null){
+            while ((line = bufferedReader.readLine()) != null) {
                 allWords.add(line);
             }
 
@@ -27,10 +27,5 @@ public class RandomWordFromFile extends RandomWord {
         return allWords;
     }
 
-    public String getRandomWord() {
-        Random random = new Random();
-        ArrayList<String> randomWord = getWordsFromFile();
-        return randomWord.get(random.nextInt(randomWord.size()));
-    }
 
 }

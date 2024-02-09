@@ -2,89 +2,35 @@ package pl.edu.agh.hangman;
 
 import java.util.Scanner;
 
-
 public class Hangman {
-
-    public static final String[] HANGMANPICS = new String[]{
-            "  +---+\n" +
-                    "  |   |\n" +
-                    "      |\n" +
-                    "      |\n" +
-                    "      |\n" +
-                    "      |\n" +
-                    "=========",
-            "  +---+\n" +
-                    "  |   |\n" +
-                    "  O   |\n" +
-                    "      |\n" +
-                    "      |\n" +
-                    "      |\n" +
-                    "=========",
-            "  +---+\n" +
-                    "  |   |\n" +
-                    "  O   |\n" +
-                    "  |   |\n" +
-                    "      |\n" +
-                    "      |\n" +
-                    "=========",
-            "  +---+\n" +
-                    "  |   |\n" +
-                    "  O   |\n" +
-                    " /|   |\n" +
-                    "      |\n" +
-                    "      |\n" +
-                    "=========",
-            "  +---+\n" +
-                    "  |   |\n" +
-                    "  O   |\n" +
-                    " /|\\  |\n" +
-                    "      |\n" +
-                    "      |\n" +
-                    "=========",
-            "  +---+\n" +
-                    "  |   |\n" +
-                    "  O   |\n" +
-                    " /|\\  |\n" +
-                    " /    |\n" +
-                    "      |\n" +
-                    "=========",
-            "  +---+\n" +
-                    "  |   |\n" +
-                    "  O   |\n" +
-                    " /|\\  |\n" +
-                    " / \\  |\n" +
-                    "      |\n" +
-                    "========"
-    };
-
-    public static final String GAMELOSE = "°՞(ᗒᗣᗕ)՞°";
-
-    public static final String GAMEWIN = "(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧";
-
     public static void main(String[] args) {
+        RandomWordProvider words = chooseRandomWordProvider();
+        Game game = new Game(words.getRandomWord());
+        do {
+        } while (game.updateGameState(getChar()));
+    }
 
+    private static char getChar() {
+        System.out.print("guess> ");
         Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine().charAt(0);
+    }
 
-        RandomWord random = null;
+    private static RandomWordProvider chooseRandomWordProvider() {
+        RandomWordProvider randomWordProvider = null;
+        do {
+            System.out.println("Select the source of a random word ");
+            System.out.println("1. From file :");
+            System.out.println("2. From the Internet :");
 
-        System.out.println("Wprowadz numer odpowiadajacy z czego mam wczytac słowa ");
-        System.out.println("1. Z pliku :");
-        System.out.println("2. Z internetu :");
-
-        String getType = scanner.nextLine();
-
-        if(getType.contains("1")) random = new RandomWordFromFile();
-
-        else if (getType.contains("2")) random = new RandomWordFromInternet();
-
-        CheckResult checkResult = new CheckResult(random.getRandomWord());
-        String input;
-
-        do{
-            System.out.println("Podaj literke : ");
-            input = scanner.nextLine();
-
-        }while(checkResult.checkLetter(input.charAt(0)));
-
+            Scanner scanner = new Scanner(System.in);
+            int getType = scanner.nextLine().charAt(0);
+            switch (getType) {
+                case '1' -> randomWordProvider = new RandomWordFromFile();
+                case '2' -> randomWordProvider = new RandomWordFromInternet();
+                default -> System.out.println("Invalid value! Try again");
+            }
+        } while (randomWordProvider == null);
+        return randomWordProvider;
     }
 }

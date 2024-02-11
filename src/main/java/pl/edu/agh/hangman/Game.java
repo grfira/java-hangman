@@ -1,8 +1,8 @@
 package pl.edu.agh.hangman;
 
-import static pl.edu.agh.hangman.PrintResult.printInfo;
-import static pl.edu.agh.hangman.PrintResult.printGameState;
-import static pl.edu.agh.hangman.PrintResult.printResult;
+//import static pl.edu.agh.hangman.PrintResult.printInfo;
+//import static pl.edu.agh.hangman.PrintResult.printGameState;
+//import static pl.edu.agh.hangman.PrintResult.printResult;
 
 public class Game {
     public static final String BLANK_SIGN = "_";
@@ -10,23 +10,27 @@ public class Game {
     private final String wordToFind;
     private String currentWord;
 
+    private PrintResult print = new PrintResult();
+
+
+
     public Game(String wordToFind) {
         this.wordToFind = wordToFind.toUpperCase();
         this.currentWord = BLANK_SIGN.repeat(wordToFind.length());
-        printGameState(level, currentWord);
+        System.out.println(print.printGameState(level, currentWord));
     }
 
     public boolean updateGameState(char letter) {
         processLetter(Character.toUpperCase(letter));
-        printGameState(level, currentWord);
+        System.out.println(print.printGameState(level, currentWord));
 
         if (!currentWord.contains(BLANK_SIGN)) {
-            printResult(true);
+            System.out.println(print.printResult(true));
             return false;
         }
         if (level >= PrintResult.HANGMANPICS.length-1) {
-            printResult(false);
-            printInfo("The correct word: "+ wordToFind);
+            System.out.println(print.printResult(false) +
+                               "The correct word: "+ wordToFind );
             return false;
         }
         return true;

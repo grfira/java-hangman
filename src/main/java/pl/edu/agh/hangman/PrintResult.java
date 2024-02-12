@@ -57,24 +57,24 @@ public class PrintResult {
 
     public static final String GAMEWIN = "(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧";
 
-    public static void printResult(boolean finalResult) {
+    public String printResult(boolean finalResult) {
 
         if (finalResult) {
-            System.out.println(GAMEWIN);
+            return GAMEWIN;
         } else {
-            System.out.println(GAMELOSE);
+            return GAMELOSE;
         }
     }
 
-    public static void printGameState(int level, String playerWord) {
+    public String printGameState(int level, String playerWord) {
         String word = playerWord.replaceAll(".(?!$)","$0 ");
         StringBuilder stringBuilder = new StringBuilder(HANGMANPICS[level]);
         stringBuilder.insert(31, "\t\t" + word);
-        System.out.println(stringBuilder);
+        return stringBuilder.toString();
     }
 
-    public static void printInfo(String info) {
-        System.out.println(info);
-    }
+//    public String printInfo(String info) {
+//        return info;
+//    }
 
 }
